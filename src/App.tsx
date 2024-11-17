@@ -10,6 +10,12 @@ import {
 } from "./components/ui/card"
 import { Slider } from "./components/ui/slider"
 import { Github } from "lucide-react"
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./components/ui/accordion"
 
 function App() {
   const [currentNumber, setCurrentNumber] = useState(0)
@@ -55,6 +61,24 @@ function App() {
                 {currentNumber} is{" "}
                 {isPrimeNumber ? "a prime number ✅" : "not a prime number ☠"}
               </p>
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>List of prime numbers</AccordionTrigger>
+                  <AccordionContent>
+                    <ul>
+                      {Array.from({ length: 1000 }, (_, i) => i + 1)
+                      .map((num, index) => (
+                        <li
+                          key={index}
+                          className={`${isPrime(num) && "bg-green-600"}`}
+                        >
+                          {num} {isPrime(num) ? "✅" : "☠"}
+                        </li>
+                      ))}
+                    </ul>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </CardContent>
         </Card>
